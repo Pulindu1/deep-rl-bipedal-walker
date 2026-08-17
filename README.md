@@ -152,7 +152,8 @@ Four algorithms were tried before settling on TQC:
 │   ├── figures/training-curves.png
 │   ├── logs/                           # per-episode reward and length, both runs
 │   └── videos/hardcore-demo.gif        # rendered rollout of the trained agent
-└── requirements.txt
+├── requirements.txt
+└── LICENSE
 ```
 
 Raw `.mp4` rollouts and the per-run `videos-*/` and `logs-*/` folders written by the recorder are git-ignored; the GIF and the logs above are the versioned versions of those artefacts.
@@ -199,3 +200,9 @@ python scripts/plot_training_curves.py
 6. Popov et al., *Data-efficient Deep Reinforcement Learning for Dexterous Manipulation* (velocity-bonus shaping), [arXiv:1704.03073](https://arxiv.org/abs/1704.03073).
 
 Reference implementations consulted while writing the agent: [SamsungLabs/tqc_pytorch](https://github.com/SamsungLabs/tqc_pytorch), [SB3-Contrib's TQC](https://sb3-contrib.readthedocs.io/en/master/modules/tqc.html), and the running mean/variance normaliser from [OpenAI Baselines](https://github.com/openai/baselines/blob/master/baselines/common/running_mean_std.py). The agent itself — networks, TQC update, elite buffer, normaliser — and all experiments are my own.
+
+---
+
+## License
+
+[MIT](LICENSE) — free to use, modify and distribute with attribution.
