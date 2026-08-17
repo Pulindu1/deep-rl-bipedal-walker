@@ -33,16 +33,29 @@ __all__ = [
 
 STANDARD_ID = "BipedalWalker-v3"
 HARDCORE_ID = "BipedalWalkerHardcore-v3"
+EPISODE_CAP = 2000  # steps per episode, matching the runs in results/logs/
 
 
-def make_walker(hardcore: bool = False, render_mode: str | None = "rgb_array", **kwargs):
+def make_walker(
+    hardcore: bool = False,
+    render_mode: str | None = "rgb_array",
+    max_episode_steps: int | None = EPISODE_CAP,
+    **kwargs,
+):
     """Create a BipedalWalker environment.
 
     ``BipedalWalkerHardcore-v3`` is the same physics with ladders, stumps and
-    pits added to the terrain. Both have a 24-dim observation, a 4-dim
-    continuous action in ``[-1, 1]`` and a 2000-step episode cap.
+    pits added to the terrain. Both have a 24-dim observation and a 4-dim
+    continuous action in ``[-1, 1]``.
+
+    Gymnasium registers the standard course with a 1600-step limit and the
+    hardcore course with 2000. The runs in ``results/logs/`` used 2000 for
+    both, so that is the default here; pass ``max_episode_steps=None`` for
+    Gymnasium's registered values.
     """
     env_id = HARDCORE_ID if hardcore else STANDARD_ID
+    if max_episode_steps is not None:
+        kwargs["max_episode_steps"] = max_episode_steps
     return gym.make(env_id, render_mode=render_mode, **kwargs)
 
 
@@ -167,7 +180,7 @@ class InfoTracker:
             pass
 
         episodes = self._series("count")
-        fig, ax = plt.subplots(figsize=(9, 4))
+        _, ax = plt.subplots(figsize=(9, 4))
 
         if r_sum:
             ax.plot(episodes, self._series("r_sum"), linestyle=":", marker="x",

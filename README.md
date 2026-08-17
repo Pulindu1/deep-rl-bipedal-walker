@@ -15,6 +15,8 @@ Implemented from scratch in PyTorch (no Stable-Baselines) with **sample efficien
 
 Both environments are Gymnasium's `BipedalWalker-v3` and `BipedalWalkerHardcore-v3` (Box2D physics, 24-dim observation, 4-dim continuous action in `[-1, 1]`, 2000-step episode cap). The hardcore variant adds ladders, stumps and pits to the terrain.
 
+> Gymnasium registers the standard course with a 1600-step limit; these runs used 2000 for both courses, so `make_walker()` sets that explicitly. 32 standard-course episodes in the logs run past 1600 steps, so the default limit would not reproduce them.
+
 ![Training curves for both environments](results/figures/training-curves.png)
 
 *Top: reward per episode. Bottom: the same rolling mean plotted against environment steps consumed — the sample-efficiency view.*
