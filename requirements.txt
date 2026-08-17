@@ -1,0 +1,13 @@
+# Python 3.10 was used for the original runs.
+torch>=2.0
+numpy>=1.24
+matplotlib>=3.7
+
+# BipedalWalker environments (Box2D physics backend required)
+gymnasium[box2d]>=0.29
+
+# Video recording of rollouts (gymnasium.wrappers.RecordVideo)
+moviepy>=1.0
+
+# Notebook
+jupyterlab>=4.0
